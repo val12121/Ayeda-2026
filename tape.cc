@@ -13,3 +13,4 @@ void Tape::SetCell(int posX, int posY, bool color) {
   //assert(get_max_sizeX() > posX && get_max_sizeY() > posY);
   tape_[posX][posY] = color;
 }
+
