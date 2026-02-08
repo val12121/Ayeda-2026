@@ -2,8 +2,9 @@
 #include <iostream>
 
 #include "Tape.h"
+#include "colors.h"
 
-enum class Direction {Left = 0, Up, Right, Down};
+enum class Direction {Left = 0, Right, Up, Down};
 
 class Ant {
  public:
@@ -24,16 +25,16 @@ class Ant {
   friend std::ostream& operator<<(std::ostream& os, const Ant& ant) {
     switch (ant.dir_) {
       case Direction::Left: 
-          os << "[<]"; 
+          os << BG_RED << "[<]" << RESET; 
         break;
       case Direction::Right:
-          os << "[>]";
+          os << BG_RED << "[>]" << RESET;
         break;
       case Direction::Up:
-          os << "[^]";
+          os << BG_RED << "[^]" << RESET;
         break;
       case Direction::Down:
-          os << "[v]";
+          os << BG_RED << "[v]" << RESET;
         break;
       default:
         break;
@@ -61,33 +62,52 @@ class Ant {
   Direction dir_;
   
   void turnLeft() { 
-    if ( static_cast<int>(dir_) >= 1) { 
-      dir_ = static_cast<Direction>(static_cast<int>(dir_) - 1);
-    } else { dir_ = static_cast<Direction>(3); }
+    switch (dir_) {
+      case Direction::Up: 
+        dir_ = Direction::Left;  
+      break;
+      case Direction::Left:  
+        dir_ = Direction::Down;  
+      break;
+      case Direction::Down:  
+        dir_ = Direction::Right; 
+      break;
+      case Direction::Right: 
+        dir_ = Direction::Up;    
+      break;
+    }
   }
 
   void turnRight() {
-    if ( static_cast<int>(dir_) < 3) { 
-      dir_ = static_cast<Direction>(static_cast<int>(dir_) + 1);
-    } else { 
-      dir_ = static_cast<Direction>(0); 
+    switch (dir_) {
+      case Direction::Up: 
+        dir_ = Direction::Right; 
+      break;
+      case Direction::Right: 
+        dir_ = Direction::Down; 
+      break;
+      case Direction::Down: 
+        dir_ = Direction::Left; 
+      break;
+      case Direction::Left: 
+        dir_ = Direction::Up; 
+      break;
     }
   }
   
   void move() {
-    int dir1 = static_cast<int>(dir_);
-    switch (dir1) {
-      case 0: 
+    switch (dir_) {
+      case Direction::Left: 
+          sety(gety() - 1);
+        break;
+      case Direction::Up:
           setx(getx() - 1);
         break;
-      case 1:
+      case Direction::Right:
           sety(gety() + 1);
         break;
-      case 2:
+      case Direction::Down:
           setx(getx() + 1);
-        break;
-      case 3:
-          sety(gety() - 1);
         break;
       default:
         break;

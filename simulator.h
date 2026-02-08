@@ -7,18 +7,22 @@ class Simulator {
       : tape_(tape), ant_(ant), steps_(0) {};
   void run() {
     while (!isFinished()) {
-      ant_.step(tape_);
+      // Dibujar
       for (int i = 0; i < tape_.get_max_sizeX(); i++) {
         for (int j = 0; j < tape_.get_max_sizeY(); j++) {
           if (ant_.getx() == i && ant_.gety() == j) {
             std::cout << ant_;
           } else {
-            std::cout << (tape_.get_tape()[i][j] == true ? "[X]" : "[ ]"); 
+            std::cout << (tape_.get_color(i, j) ? "[X]" : "[ ]");
           }
         }
-        cout << endl; 
+        std::cout << '\n';
       }
+      std::cout << "Steps: " << steps_ << "\n";
       std::cin.get();
+
+      ant_.step(tape_);
+      steps_++;
     }
   }
 
@@ -29,7 +33,8 @@ class Simulator {
 
   void step() { steps_++; };
   bool isFinished() {
-    if (ant_.getx() == tape_.get_max_sizeX() || ant_.gety() == tape_.get_max_sizeY()) {
+    if (ant_.getx() == tape_.get_max_sizeX() ||
+        ant_.gety() == tape_.get_max_sizeY()) {
       return true;
     } else if (ant_.getx() == 0 || ant_.gety() == 0) {
       return true;
