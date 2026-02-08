@@ -21,7 +21,25 @@ class Ant {
     move();
   }
 
-  friend std::ostream& operator<<(std::ostream&, const Ant&);
+  friend std::ostream& operator<<(std::ostream& os, const Ant& ant) {
+    switch (ant.dir_) {
+      case Direction::Left: 
+          os << "[<]"; 
+        break;
+      case Direction::Right:
+          os << "[>]";
+        break;
+      case Direction::Up:
+          os << "[^]";
+        break;
+      case Direction::Down:
+          os << "[v]";
+        break;
+      default:
+        break;
+    }
+    return os;
+  }
   
   //Setters
   void setx( int x ) { x_ = x; }
@@ -30,6 +48,8 @@ class Ant {
   //Getters
   int getx() const { return x_; }
   int gety() const { return y_; }
+
+  int get_dir() { return static_cast<int>(dir_); }
 
   void InfoAnt() {
     std::cout << "pos (" << getx() << ", " << gety() << ")\n";

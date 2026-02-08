@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include "colors.h"
+
 
 using namespace std;
 class Tape {
@@ -10,7 +12,9 @@ class Tape {
   vector<vector<bool>> tape_;
 
  public:
-  Tape() : tape_(sizeX_, vector<bool>(sizeY_, false)) {}
+  Tape() : tape_(sizeX_, vector<bool>(sizeY_, false)) {
+    //std::cout << tape_.size() << std::endl;
+  }
 
   Tape(int sizeX, int sizeY) 
   {
@@ -21,6 +25,20 @@ class Tape {
     for (int i = 0; i < sizeX; ++i) {
       tape_[i].resize(sizeY, false);
     }
+  }
+
+  friend std::ostream& operator<<(std::ostream& os, const Tape& tape) {
+    for (int i = 0; i < tape.get_max_sizeX(); i++) {
+      for (int j = 0; j < tape.get_max_sizeY(); j++) {
+        if (tape.get_tape()[i][j] == false) {
+          os << BG_BLUE << "  " << RESET;
+        } else {
+          os << BG_RED << "  " << RESET;
+        }
+      }
+      os << "\n";
+    }
+    return os;
   }
 
   // Getters
