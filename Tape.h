@@ -24,14 +24,12 @@ class Tape {
   }
 
   // Getters
-  bool get_color() const { return color_; }
+  bool get_color( int x, int y ) const { return tape_[x][y]; }
   int get_max_sizeX() const { return sizeX_; }
   int get_max_sizeY() const { return sizeY_; }
   const vector<vector<bool>>& get_tape() const { return tape_; } //Reference
 
   // Setter
-  void set_color(bool color) { color_ = color; }
-
   void InfoCell(int posX, int posY);
 
   // Change Color of the Cell

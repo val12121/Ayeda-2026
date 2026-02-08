@@ -3,39 +3,26 @@
 
 #include "Tape.h"
 
-enum class Direction { Left, Up, Right, Down };
+enum class Direction {Left = 0, Up, Right, Down};
 
 class Ant {
  public:
   Ant() {};
   Ant(int x, int y, Direction dir) : x_(x), y_(y), dir_(dir) {}
+  
   void step(Tape& tape) {
-    if (tape.get_color() == true) { // if color == black
-      tape.set_color(false);
+    if (tape.get_color(x_, y_) == true) { // if color == black
       turnRight();
-    } else {
-      tape.set_color(true);
-      turnLeft();
+      tape.SetCell(x_, y_, false);
+    } else { //if color == white
+      turnLeft();    
+      tape.SetCell(x_, y_, true);
     }
+    move();
   }
 
   friend std::ostream& operator<<(std::ostream&, const Ant&);
-
- private:
-  int x_, y_;
-  Direction dir_;
-  void turnLeft() { 
-    if ( static_cast<int>(dir_) >= 1) { 
-      dir_ = static_cast<Direction>(static_cast<int>(dir_) - 1);
-    } else { dir_ = static_cast<Direction>(4); }
-  }
-
-  void turnRight() {
-    if ( static_cast<int>(dir_) <= 3) { 
-      dir_ = static_cast<Direction>(static_cast<int>(dir_) + 1);
-    } else { dir_ = static_cast<Direction>(1); }
-  }
-
+  
   //Setters
   void setx( int x ) { x_ = x; }
   void sety( int y ) { y_ = y; }
@@ -44,6 +31,29 @@ class Ant {
   int getx() const { return x_; }
   int gety() const { return y_; }
 
+  void InfoAnt() {
+    std::cout << "pos (" << getx() << ", " << gety() << ")\n";
+    std::cout << "Direction " << static_cast<int>(dir_) << endl;
+  }
+
+ private:
+  int x_, y_;
+  Direction dir_;
+  
+  void turnLeft() { 
+    if ( static_cast<int>(dir_) >= 1) { 
+      dir_ = static_cast<Direction>(static_cast<int>(dir_) - 1);
+    } else { dir_ = static_cast<Direction>(3); }
+  }
+
+  void turnRight() {
+    if ( static_cast<int>(dir_) < 3) { 
+      dir_ = static_cast<Direction>(static_cast<int>(dir_) + 1);
+    } else { 
+      dir_ = static_cast<Direction>(0); 
+    }
+  }
+  
   void move() {
     int dir1 = static_cast<int>(dir_);
     switch (dir1) {
