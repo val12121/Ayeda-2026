@@ -27,8 +27,6 @@ class Ant {
       case Direction::Down:
         os << BG_RED << "[v]" << RESET;
         break;
-      default:
-        break;
     }
     return os;
   }
