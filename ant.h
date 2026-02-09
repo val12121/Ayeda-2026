@@ -5,7 +5,6 @@
 #include "colors.h"
 
 enum class Direction { Left = 0, Right, Up, Down };
-
 class Ant {
  public:
   Ant() {};

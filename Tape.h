@@ -2,7 +2,6 @@
 #include <vector>
 #include "colors.h"
 
-
 using namespace std;
 class Tape {
  private:
