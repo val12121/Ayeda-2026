@@ -4,7 +4,6 @@
 #include <sstream>
 
 int main (int argc, char *argv[]) {
-
   if (argc > 1) {
     std::string nombreArchivo = argv[1]; // Primer argumento después del programa
     std::ifstream archivo(nombreArchivo); // Abrir el archivo en modo lectura
@@ -39,9 +38,34 @@ int main (int argc, char *argv[]) {
 
     nn >> dir; 
     Ant ant(x, y, static_cast<Direction>(std::stoi(dir)));
+    
+    std::getline(archivo, linea);
+    std::stringstream aa(linea);
 
+    //std::vector<int> black;
+    while (aa >> xx && aa >> yy) {
+      x = std::stoi(xx);
+      y = std::stoi(yy);
+      
+      std::cout << x << " " << y << std::endl; 
+      tape.SetCell(x, y, true);
+    }
+    
     Simulator sim (tape, ant);
     sim.run();
+
+    int option;
+
+    std::cout << "Deseas guardar una copia del resultado en un archivo?" << endl;
+    std::cout << "Si? 0, No? 1\n";
+    std::cin >> option;
+
+    if (option == 0) {
+      std::ofstream salida("salida.txt");
+      salida << sim;
+    } else {
+      return 0;
+    }
 
   } else {
     Tape tape;
