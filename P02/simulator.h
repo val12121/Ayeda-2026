@@ -14,9 +14,9 @@ class Simulator {
     for (int i = 0; i < sim.get_tape().get_max_sizeX(); i++) {
       for (int j = 0; j < sim.get_tape().get_max_sizeY(); j++) {
         if (sim.get_ant().getx() == i && sim.get_ant().gety() == j) {
-          os << sim.get_ant();
+          os << sim.get_tape().show_color(i, j) << sim.get_ant() << RESET;
         } else {
-          os << (sim.get_tape().show_color(i, j)) << RESET;
+          os << (sim.get_tape().show_color(i, j)) << " " << RESET;
         }
       }
       os << '\n';
