@@ -7,7 +7,7 @@ void Simulator::run() {
         if (ant_.getx() == i && ant_.gety() == j) {
           std::cout << ant_;
         } else {
-          std::cout << (tape_.get_color(i, j) ? "[X]" : "[ ]");
+          std::cout << (tape_.show_color(i, j)) << RESET;
         }
       }
       std::cout << '\n';
