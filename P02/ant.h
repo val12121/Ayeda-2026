@@ -7,24 +7,23 @@ enum class Direction { Left = 0, Right, Up, Down };
 class Ant {
  public:
   Ant() {};
-  Ant(int x, int y, Direction dir, Tape tape) : x_(x), y_(y), dir_(dir), tape_(tape) {}
+  Ant(int x, int y, Direction dir) : x_(x), y_(y), dir_(dir) {}
 
   void step(Tape& tape);
 
   friend std::ostream& operator<<(std::ostream& os, const Ant& ant) {
-    std::string next_color = ant.get_tape().next_color(ant.getx(), ant.gety());
     switch (ant.dir_) {
       case Direction::Left:
-        os << next_color << "[<]" << RESET;
+        os << "[<]";
         break;
       case Direction::Right:
-        os << next_color << "[>]" << RESET;
+        os << "[>]";
         break;
       case Direction::Up:
-        os << next_color << "[^]" << RESET;
+        os << "[^]";
         break;
       case Direction::Down:
-        os << next_color << "[v]" << RESET;
+        os << "[v]";
         break;
     }
     return os;
@@ -37,9 +36,9 @@ class Ant {
   // Getters
   int getx() const { return x_; }
   int gety() const { return y_; }
+  int get_color( Tape& tape ) const { return tape.get_color(x_, y_); }
 
   int get_dir() { return static_cast<int>(dir_); }
-  Tape get_tape() const { return tape_; }
 
   void InfoAnt() {
     std::cout << "pos (" << getx() << ", " << gety() << ")\n";
@@ -50,7 +49,6 @@ class Ant {
   int x_, y_;
   int size_x, size_y;
   Direction dir_;
-  Tape tape_;
 
   void turnLeft();
   void turnRight();
