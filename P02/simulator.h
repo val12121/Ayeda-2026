@@ -16,7 +16,7 @@ class Simulator {
         if (sim.get_ant().getx() == i && sim.get_ant().gety() == j) {
           os << sim.get_ant();
         } else {
-          os << (sim.get_tape().get_color(i, j) ? "[X]" : "[ ]");
+          os << (sim.get_tape().show_color(i, j)) << RESET;
         }
       }
       os << '\n';

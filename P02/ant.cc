@@ -54,12 +54,21 @@ void Ant::move() {
 }
 
 void Ant::step(Tape& tape) {
-  if (tape.get_color(x_, y_) == true) {  // if color == black
-    turnRight();
-    tape.SetCell(x_, y_, false);
-  } else {  // if color == white
-    turnLeft();
-    tape.SetCell(x_, y_, true);
+  if (tape.get_color(x_, y_) == 0) { // If color == magenta
+    if ( tape.get_dir(0) == 'D') { turnRight(); } else { turnLeft(); }
+    tape.SetCell(x_, y_, 1);
+
+  } else if (tape.get_color(x_, y_) == 1) {  // If color == white
+    if ( tape.get_dir(1) == 'D') { turnRight(); } else { turnLeft(); }
+    tape.SetCell(x_, y_, 2);
+
+  } else if (tape.get_color(x_, y_) == 2) { // If color == blue
+    if ( tape.get_dir(2) == 'D') { turnRight(); } else { turnLeft(); }
+    tape.SetCell(x_, y_, 3);
+
+  } else if (tape.get_color(x_, y_) == 3) { // If color == black
+    if ( tape.get_dir(3) == 'D') { turnRight(); } else { turnLeft(); }
+    tape.SetCell(x_, y_, 0);
   }
   move();
 }
