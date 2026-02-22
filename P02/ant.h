@@ -14,16 +14,16 @@ class Ant {
   friend std::ostream& operator<<(std::ostream& os, const Ant& ant) {
     switch (ant.dir_) {
       case Direction::Left:
-        os << "[<]";
+        os << "<";
         break;
       case Direction::Right:
-        os << "[>]";
+        os << ">";
         break;
       case Direction::Up:
-        os << "[^]";
+        os << "^";
         break;
       case Direction::Down:
-        os << "[v]";
+        os << "v";
         break;
     }
     return os;

@@ -2,7 +2,7 @@
 
 int main() 
 {
-  Tape tape (10, 10, "DDII");
+  Tape tape (10, 20, "DDII");
   int x = 5, y = 5;
   Ant ant(x, y, Direction{1});
 

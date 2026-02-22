@@ -5,9 +5,9 @@ void Simulator::run() {
     for (int i = 0; i < tape_.get_max_sizeX(); i++) {
       for (int j = 0; j < tape_.get_max_sizeY(); j++) {
         if (ant_.getx() == i && ant_.gety() == j) {
-          std::cout << ant_;
+          std::cout << tape_.show_color(i, j) << ant_ << RESET;
         } else {
-          std::cout << (tape_.show_color(i, j)) << RESET;
+          std::cout << (tape_.show_color(i, j)) << " " << RESET;
         }
       }
       std::cout << '\n';
