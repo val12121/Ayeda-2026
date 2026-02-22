@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/home/val/Documentos/Code/AYEDA/Ayeda-2026",
-      "program": "/home/val/Documentos/Code/AYEDA/Ayeda-2026/build/Debug/outDebug",
+      "externalConsole": true,
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/main.exe",
       "MIMode": "gdb",
       "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
       "setupCommands": [
