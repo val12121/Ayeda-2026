@@ -4,13 +4,11 @@ int main()
 {
   Tape tape (10, 20, "DDII");
   int x = 5, y = 5;
-  Ant ant(x, y, Direction{1});
+  Ant_X ant(x, y, Direction{1});
 
   Simulator simulator (tape, ant);
-  simulator.run();
+  simulator.run_x();
 
-
-  std::cout << tape << endl;
   return 0;
 
 }

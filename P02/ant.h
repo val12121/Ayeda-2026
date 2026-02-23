@@ -9,7 +9,7 @@ class Ant {
   Ant() {};
   Ant(int x, int y, Direction dir) : x_(x), y_(y), dir_(dir) {}
 
-  void step(Tape& tape);
+  virtual void step(Tape& tape);
 
   friend std::ostream& operator<<(std::ostream& os, const Ant& ant) {
     switch (ant.dir_) {
@@ -45,7 +45,7 @@ class Ant {
     std::cout << "Direction " << static_cast<int>(dir_) << endl;
   }
 
- private:
+  protected:
   int x_, y_;
   int size_x, size_y;
   Direction dir_;

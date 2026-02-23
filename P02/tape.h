@@ -13,11 +13,8 @@ private:
   std::string dir_ = "DIDI";
 
 public:
-  Tape() : tape_(sizeX_, vector<int>(sizeY_, 0))
-  {
-    // std::cout << tape_.size() << std::endl;
-  }
-
+  //Constructores 
+  Tape() : tape_(sizeX_, vector<int>(sizeY_, 0)) {}
   Tape(int sizeX, int sizeY, std::string dir)
   {
     sizeX_ = sizeX;
@@ -30,39 +27,7 @@ public:
       tape_[i].resize(sizeY, false);
     }
   }
-
-  std::string next_color(int x, int y)
-  {
-    std::string color;
-    switch (get_color(x, y))
-    {
-    case 0:
-      SetCell(x, y, 1);
-      color = BG_WHITE;
-      break;
-
-    case 1:
-      SetCell(x, y, 2);
-      color = BG_BLUE;
-      break;
-
-    case 2:
-      SetCell(x, y, 3);
-      color = BG_BLACK;
-      break;
-
-    case 3:
-      SetCell(x, y, 0);
-      color = BG_MAGENTA;
-      break;
-
-    default:
-      break;
-    }
-
-    return color;
-  }
-
+  
   friend std::ostream &operator<<(std::ostream &os, const Tape &tape)
   {
     for (int i = 0; i < tape.get_max_sizeX(); i++)
@@ -90,6 +55,7 @@ public:
     }
     return os;
   }
+  std::string next_color(int x, int y);
 
   // Getters
   int get_color(int x, int y) const { return tape_[x][y]; }
@@ -98,29 +64,10 @@ public:
   char get_dir(int color) const { return dir_[color]; };
   const vector<vector<int>> &get_tape() const { return tape_; } // Reference
 
-  std::string show_color(int x, int y)
-  {
-    std::string result;
-    if (get_tape()[x][y] == 0) {
-      result = BG_MAGENTA;
-    }
-    else if (get_tape()[x][y] == 1)
-    {
-      result = BG_WHITE;
-    }
-    else if (get_tape()[x][y] == 2)
-    {
-      result = BG_BLUE;
-    }
-    else if (get_tape()[x][y] == 3)
-    {
-      result = BG_BLACK;
-    }
-    return result;
-  };
-  // Setter
+  std::string show_color(int x, int y);
   void InfoCell(int posX, int posY);
-
+  
+  // Setter
   // Change Color of the Cell
   void SetCell(int posX, int posY, int color);
 };
