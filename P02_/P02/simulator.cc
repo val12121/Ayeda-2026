@@ -49,22 +49,64 @@ Simulator::Simulator(std::string filename) : steps_(0)
 
 void Simulator::run()
 {
-  while (!isFinished()) {
-    
+  while (!isFinished())
+  {
+
     std::cout << *this;
-    
+
     std::cin.get();
-    
-    for (int i = 0; i < ants_.size(); i++) {
-      ants_[i]-> step(tape_);
+
+    for (int i = 0; i < ants_.size(); i++)
+    {
+      ants_[i]->step(tape_);
     }
     steps_++;
   }
 }
 
-Direction Simulator::charToDir(std::string c) {
-    if (c == "^") return Direction::Up;
-    if (c == ">") return Direction::Right;
-    if (c == "v") return Direction::Down;
-    return Direction::Left;
+int Simulator::Save(const std::string &filename)
+{
+  std::ofstream file(filename);
+  if (!file.is_open())
+    return false;
+
+  file << "FINAL DE LA SIMULACIÓN. PASOS: " << steps_ << "\n";
+  for (int i = 0; i < tape_.get_max_sizeX(); i++)
+  {
+    for (int j = 0; j < tape_.get_max_sizeY(); j++)
+    {
+      Ant *aux = nullptr;
+      for (Ant *a : ants_) {
+        if (a->getx() == i && a->gety() == j)
+        {
+          aux = a;
+          break;
+        }
+      }
+
+      if (aux != nullptr) {
+        file << *aux << " ";
+      }
+      else
+      {
+        // Representamos los colores con caracteres o espacios
+        int color = tape_.get_color(i, j);
+        if (color >= 0)
+          file << color << " "; // Otros colores: el número
+      }
+    }
+    file << "\n";
+  }
+  return 0;
+}
+
+Direction Simulator::charToDir(std::string c)
+{
+  if (c == "^")
+    return Direction::Up;
+  if (c == ">")
+    return Direction::Right;
+  if (c == "v")
+    return Direction::Down;
+  return Direction::Left;
 }

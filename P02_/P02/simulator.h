@@ -50,6 +50,8 @@ public:
     }
   }
 
+  int Save(const std::string& filename);
+
 private:
   std::vector<Ant *> ants_;
   int option_;
