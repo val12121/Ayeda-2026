@@ -56,5 +56,5 @@ class Ant {
 
   void turnLeft();
   void turnRight();
-  void move();
+  virtual void move();
 };
