@@ -7,7 +7,7 @@ enum class Direction { Left = 0, Right, Up, Down };
 class Ant {
  public:
   Ant() {};
-  Ant(int x, int y, Direction dir) : x_(x), y_(y), dir_(dir) {}
+  Ant(int x, int y, Direction dir, std::string lado) : x_(x), y_(y), dir_(dir), lado_{lado} {}
 
   virtual ~Ant() {}
 
@@ -39,6 +39,7 @@ class Ant {
   int getx() const { return x_; }
   int gety() const { return y_; }
   int get_color( Tape& tape ) const { return tape.get_color(x_, y_); }
+  char get_dir(int color) const { return lado_[color]; };
 
   int get_dir() { return static_cast<int>(dir_); }
 
@@ -51,6 +52,7 @@ class Ant {
   int x_, y_;
   int size_x, size_y;
   Direction dir_;
+  std::string lado_;
 
   void turnLeft();
   void turnRight();

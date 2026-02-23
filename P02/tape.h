@@ -15,11 +15,10 @@ private:
 public:
   //Constructores 
   Tape() : tape_(sizeX_, vector<int>(sizeY_, 0)) {}
-  Tape(int sizeX, int sizeY, std::string dir)
+  Tape(int sizeX, int sizeY)
   {
     sizeX_ = sizeX;
     sizeY_ = sizeY;
-    dir_ = dir;
 
     tape_.resize(sizeX);
     for (int i = 0; i < sizeX; ++i)
@@ -61,7 +60,6 @@ public:
   int get_color(int x, int y) const { return tape_[x][y]; }
   int get_max_sizeX() const { return sizeX_; }
   int get_max_sizeY() const { return sizeY_; }
-  char get_dir(int color) const { return dir_[color]; };
   const vector<vector<int>> &get_tape() const { return tape_; } // Reference
 
   std::string show_color(int x, int y);

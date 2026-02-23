@@ -3,7 +3,7 @@
 class Ant_X : public Ant {
   public:
   Ant_X () {}
-  Ant_X (int x, int y, Direction dir) : Ant (x, y, dir) {}
+  Ant_X (int x, int y, Direction dir, std::string lado) : Ant (x, y, dir, lado) {}
   void step (Tape& tape) override;
 
   friend std::ostream& operator<<(std::ostream& os, const Ant_X& ant) {
