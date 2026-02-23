@@ -1,7 +1,9 @@
 #include "ant_x.h"
 
+
 void Ant_X::step(Tape& tape) {
-  //std::cout << "Hola" << std::endl;
+  std::cout << x_ << " " << y_ << endl;
+  
   if (tape.get_color(x_, y_) == 0) { // If color == magenta
     if ( tape.get_dir(0) == 'D') { turnRight(); } else { turnLeft(); }
     tape.SetCell(x_, y_, 1);

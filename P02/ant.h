@@ -9,6 +9,8 @@ class Ant {
   Ant() {};
   Ant(int x, int y, Direction dir) : x_(x), y_(y), dir_(dir) {}
 
+  virtual ~Ant() {}
+
   virtual void step(Tape& tape);
 
   friend std::ostream& operator<<(std::ostream& os, const Ant& ant) {

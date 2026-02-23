@@ -10,7 +10,7 @@ private:
   int sizeX_ = 20;
   int sizeY_ = 20;
   vector<vector<int>> tape_;
-  std::string dir_ = "DIDI";
+  std::string dir_ = "DI";
 
 public:
   //Constructores 

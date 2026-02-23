@@ -1,14 +1,17 @@
 #include "simulator.h"
+#include <string>
+#include <sstream>
 
-int main() 
+int main(int argc, char *argv[]) 
 {
   Tape tape (10, 20, "DDII");
   int x = 5, y = 5;
-  Ant_X ant(x, y, Direction{1});
+  Ant* ant;
+
+  ant = new Ant_X(x, y, Direction{2});
 
   Simulator simulator (tape, ant);
-  simulator.run_x();
+  simulator.run();
 
   return 0;
-
 }
