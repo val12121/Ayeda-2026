@@ -3,16 +3,15 @@
 #include "colors.h"
 
 using namespace std;
-class Tape
-{
+class Tape {
 private:
   int color_ = 0;
   int sizeX_ = 20;
   int sizeY_ = 20;
   vector<vector<int>> tape_;
-  std::string dir_ = "DI";
+  //std::string dir_ = "DI";
 
-public:
+ public:
   //Constructores 
   Tape() : tape_(sizeX_, vector<int>(sizeY_, 0)) {}
   Tape(int sizeX, int sizeY)
