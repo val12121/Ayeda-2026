@@ -4,14 +4,10 @@
 
 int main(int argc, char *argv[]) 
 {
-  Tape tape (10, 20);
-  int x = 5, y = 5;
-  Ant* ant;
+  std::string archivo = argv[1];
+  Simulator sim(archivo);
 
-  ant = new Ant_X(x, y, Direction{2}, "DDII");
-
-  Simulator simulator (tape, ant);
-  simulator.run();
-
-  return 0;
+  sim.InfoAnts();
+  sim.run();
+  std::cout << sim;
 }
