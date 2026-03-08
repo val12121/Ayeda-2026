@@ -35,25 +35,26 @@ std::string Tape::next_color(int x, int y)
 }
 
 std::string Tape::show_color(int x, int y)
+{
+  std::string result;
+  if (get_tape()[x][y] == 0)
   {
-    std::string result;
-    if (get_tape()[x][y] == 0) {
-      result = BG_MAGENTA;
-    }
-    else if (get_tape()[x][y] == 1)
-    {
-      result = BG_WHITE;
-    }
-    else if (get_tape()[x][y] == 2)
-    {
-      result = BG_BLUE;
-    }
-    else if (get_tape()[x][y] == 3)
-    {
-      result = BG_BLACK;
-    }
-    return result;
-  };
+    result = BG_MAGENTA;
+  }
+  else if (get_tape()[x][y] == 1)
+  {
+    result = BG_WHITE;
+  }
+  else if (get_tape()[x][y] == 2)
+  {
+    result = BG_BLUE;
+  }
+  else if (get_tape()[x][y] == 3)
+  {
+    result = BG_BLACK;
+  }
+  return result;
+};
 
 void Tape::InfoCell(int posX, int posY)
 {

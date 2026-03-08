@@ -21,21 +21,27 @@ Simulator::Simulator(std::string filename) : steps_(0)
 
   std::stringstream ss(line);
   std::string segment;
+
   while (std::getline(ss, segment, ';'))
   {
     std::stringstream ss_ant(segment);
     std::string rules, dirStr;
     int x, y;
+
     if (ss_ant >> rules >> x >> y >> dirStr)
     {
       Direction d = charToDir(dirStr);
-      if (rules.length() > 2)
+      // --- separar tipo y reglas ---
+      char type = rules[0];                    // H o C
+      std::string realRules = rules.substr(2); // quitar "H-" o "C-"
+
+      if (type == 'H')
       {
-        ants_.push_back(new Ant_X(x, y, d, rules));
+        ants_.push_back(new Ant_Herbivore(x, y, d, realRules));
       }
-      else
+      else if (type == 'C')
       {
-        ants_.push_back(new Ant(x, y, d, rules));
+        ants_.push_back(new Ant_Carnivore(x, y, d, realRules));
       }
     }
   }
@@ -53,6 +59,39 @@ void Simulator::run()
   {
     std::cout << *this;
     std::cin.get();
+    int food = 0;
+    for (int i = 0; i < ants_.size(); i++) {
+      if (ants_[i]->ant_type() == "Car") {
+        double food = 0;
+        // Obtenemos el color de la celda donde está el carnívoro
+        int color_carnivoro = tape_->get_color(ants_[i]->getx(), ants_[i]->gety());
+
+        for (int j = 0; j < ants_.size(); j++) {
+          // Si es herbívora Y está en una celda del mismo color que el carnívoro
+          if (ants_[j]->ant_type() == "Her") {
+            int color_herbivora = tape_->get_color(ants_[j]->getx(), ants_[j]->gety());
+            
+            if (color_herbivora == color_carnivoro) {
+              // Sumamos su vida al acumulador 'food'
+              food += ants_[j]->get_life();
+              // Aplicamos daño usando la función voracity del carnívoro 'i' sobre la herbívora 'j'
+              ants_[j]->Damage(ants_[i]->get_voracity());
+            }
+          }
+        }
+        // El carnívoro usa la función Eat con el total de vida recolectado
+        ants_[i]->Eat(food);
+      }
+    }
+    for (auto it = ants_.begin(); it != ants_.end(); ) {
+      if ((*it)->get_life() <= 0) {
+        std::cout << "Una hormiga " << (*it)->ant_type() << " ha fallecido" << std::endl;
+        delete *it;           
+        it = ants_.erase(it); 
+      } else {
+        ++it; 
+      }
+    }
     for (int i = 0; i < ants_.size(); i++)
     {
       ants_[i]->step(tape_);
@@ -68,19 +107,21 @@ int Simulator::Save(const std::string &filename)
     return false;
 
   file << "FINAL DE LA SIMULACIÓN. PASOS: " << steps_ << "\n";
-  for (int i = tape_->get_min_sizeX(); i < tape_->get_max_sizeX(); i++)
+  for (int i = tape_->get_min_sizeX(); i <= tape_->get_max_sizeX(); i++)
   {
-    for (int j = tape_->get_min_sizeY(); j < tape_->get_max_sizeY(); j++)
+    for (int j = tape_->get_min_sizeY(); j <= tape_->get_max_sizeY(); j++)
     {
       Ant *aux = nullptr;
-      for (Ant *a : ants_) {
+      for (Ant *a : ants_)
+      {
         if (a->getx() == i && a->gety() == j)
         {
           aux = a;
           break;
         }
       }
-      if (aux != nullptr) {
+      if (aux != nullptr)
+      {
         file << *aux << " ";
       }
       else

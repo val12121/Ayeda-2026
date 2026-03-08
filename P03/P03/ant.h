@@ -59,7 +59,13 @@ class Ant {
   char get_dir(int color) const { return lado_[color]; };
 
   int get_dir() { return static_cast<int>(dir_); }
-  
+  double get_life() { return LifeTime; }
+  virtual std::string ant_type() { return ""; }
+
+  virtual void Eat( double food ) { }
+  virtual void Damage( int per ) {}
+  virtual double get_voracity() { return 0; }
+
 
   void InfoAnt() {
     std::cout << "pos (" << getx() << ", " << gety() << ")\n";
@@ -69,6 +75,7 @@ class Ant {
   protected:
   int x_, y_;
   int size_x, size_y;
+  double LifeTime = 40; 
   Direction dir_;
   std::string lado_;
 
