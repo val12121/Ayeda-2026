@@ -13,7 +13,7 @@ Simulator::Simulator(std::string filename) : steps_(0)
 
   int rows, cols, num_colors;
   file >> rows >> cols >> num_colors;
-  tape_ = new TapePeriodic(rows, cols);
+  tape_ = new TapeReflective(rows, cols);
 
   std::string line;
   std::getline(file, line); // Consumir salto de línea

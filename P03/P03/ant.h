@@ -35,6 +35,22 @@ class Ant {
   // Setters
   void setx(int x) { x_ = x; }
   void sety(int y) { y_ = y; }
+  void setdir(int dir) { 
+    switch (dir) {
+    case 0:
+      dir_ = Direction::Left;
+      break;
+    case 1:
+      dir_ = Direction::Right;
+      break;
+    case 2:
+      dir_ = Direction::Up;
+      break;
+    case 3:
+      dir_ = Direction::Down;
+      break;
+    }
+  }
 
   // Getters
   int getx() const { return x_; }
@@ -43,6 +59,7 @@ class Ant {
   char get_dir(int color) const { return lado_[color]; };
 
   int get_dir() { return static_cast<int>(dir_); }
+  
 
   void InfoAnt() {
     std::cout << "pos (" << getx() << ", " << gety() << ")\n";

@@ -1,6 +1,7 @@
 #pragma once
 #include "ant.h"
 #include "tape_periodic.h"
+#include "tape_reflective.h"
 
 class Ant_X : public Ant {
   public:
