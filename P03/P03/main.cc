@@ -5,7 +5,8 @@
 int main(int argc, char *argv[])
 {
   std::string archivo = argv[1];
-  Simulator sim(archivo);
+  std::string opcion = argv[2];
+  Simulator sim(archivo, opcion);
 
   sim.InfoAnts();
   sim.run();

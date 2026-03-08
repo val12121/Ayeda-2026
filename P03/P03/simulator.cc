@@ -2,7 +2,7 @@
 #include "fstream"
 #include "sstream"
 
-Simulator::Simulator(std::string filename) : steps_(0)
+Simulator::Simulator(std::string filename, const std::string opcion) : steps_(0)
 {
   std::ifstream file(filename);
   if (!file.is_open())
@@ -13,7 +13,13 @@ Simulator::Simulator(std::string filename) : steps_(0)
 
   int rows, cols, num_colors;
   file >> rows >> cols >> num_colors;
-  tape_ = new TapeSliding(rows, cols);
+  if (opcion ==  "-S" || opcion ==  "-s") {
+    tape_ = new TapeSliding(rows, cols);
+  } else if (opcion == "-R" || opcion == "-r") {
+    tape_ = new TapeReflective(rows, cols);
+  } else if (opcion == "-P" || opcion == "-p") {
+    tape_ = new TapePeriodic(rows, cols);
+  }
 
   std::string line;
   std::getline(file, line); // Consumir salto de línea
@@ -95,6 +101,7 @@ void Simulator::run()
     for (int i = 0; i < ants_.size(); i++)
     {
       ants_[i]->step(tape_);
+      tape_->switcher(ants_[i]);
     }
     steps_++;
   }

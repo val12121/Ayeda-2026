@@ -5,7 +5,7 @@ class Simulator
 {
 public:
   Simulator(Tape *tape, Ant *ant) : tape_(tape), ant_(ant), steps_(0) {}
-  Simulator(std::string archivo);
+  Simulator(std::string archivo, const std::string opcion = "-S");
 
   void run();
   Tape get_tape() const { return *tape_; }
@@ -62,18 +62,18 @@ private:
   void step() { steps_++; };
   bool isFinished()
   {
-    for (Ant *a : ants_)
-    {
-      if (a->getx() < tape_->get_min_sizeX() || a->gety() < tape_->get_min_sizeY() ||
-          a->getx() >= tape_->get_max_sizeX() ||
-          a->gety() >= tape_->get_max_sizeY())
-      {
-        /*
-        *1! return true; // Una se salió, fin del juego 
-        */
-        return (tape_->switcher(a));
-      }
-    }
+    // for (Ant *a : ants_)
+    // {
+    //   if (a->getx() < tape_->get_min_sizeX() || a->gety() < tape_->get_min_sizeY() ||
+    //       a->getx() >= tape_->get_max_sizeX() ||
+    //       a->gety() >= tape_->get_max_sizeY())
+    //   {
+    //     /*
+    //     *1! return true; // Una se salió, fin del juego 
+    //     */
+    //     return (tape_->switcher(a));
+    //   }
+    // }
     return false;
   }
 };
