@@ -13,7 +13,7 @@ Simulator::Simulator(std::string filename) : steps_(0)
 
   int rows, cols, num_colors;
   file >> rows >> cols >> num_colors;
-  tape_ = new TapeReflective(rows, cols);
+  tape_ = new TapeSliding(rows, cols);
 
   std::string line;
   std::getline(file, line); // Consumir salto de línea
@@ -68,9 +68,9 @@ int Simulator::Save(const std::string &filename)
     return false;
 
   file << "FINAL DE LA SIMULACIÓN. PASOS: " << steps_ << "\n";
-  for (int i = 0; i < tape_->get_max_sizeX(); i++)
+  for (int i = tape_->get_min_sizeX(); i < tape_->get_max_sizeX(); i++)
   {
-    for (int j = 0; j < tape_->get_max_sizeY(); j++)
+    for (int j = tape_->get_min_sizeY(); j < tape_->get_max_sizeY(); j++)
     {
       Ant *aux = nullptr;
       for (Ant *a : ants_) {

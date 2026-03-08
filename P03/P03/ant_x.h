@@ -2,6 +2,7 @@
 #include "ant.h"
 #include "tape_periodic.h"
 #include "tape_reflective.h"
+#include "tape_sliding.h"
 
 class Ant_X : public Ant {
   public:

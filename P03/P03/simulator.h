@@ -13,9 +13,9 @@ public:
 
   friend std::ostream &operator<<(std::ostream &os, const Simulator &sim)
   {
-    for (int i = 0; i < sim.get_tape().get_max_sizeX(); i++)
+    for (int i = sim.tape_->get_min_sizeX(); i < sim.tape_->get_max_sizeX(); i++)
     {
-      for (int j = 0; j < sim.get_tape().get_max_sizeY(); j++)
+      for (int j = sim.tape_->get_min_sizeY(); j < sim.tape_->get_max_sizeY(); j++)
       {
         Ant *anty = nullptr;
         for (Ant *aux : sim.ants_)
@@ -28,11 +28,11 @@ public:
         }
         if (anty != nullptr)
         {
-          os << sim.get_tape().show_color(i, j) << *anty << RESET;
+          os << sim.tape_->show_color(i, j) << *anty << RESET;
         }
         else
         {
-          os << sim.get_tape().show_color(i, j) << " " << RESET;
+          os << sim.tape_->show_color(i, j) << " " << RESET;
         }
       }
       os << '\n';
@@ -64,7 +64,7 @@ private:
   {
     for (Ant *a : ants_)
     {
-      if (a->getx() < 0 || a->gety() < 0 ||
+      if (a->getx() < tape_->get_min_sizeX() || a->gety() < tape_->get_min_sizeY() ||
           a->getx() >= tape_->get_max_sizeX() ||
           a->gety() >= tape_->get_max_sizeY())
       {

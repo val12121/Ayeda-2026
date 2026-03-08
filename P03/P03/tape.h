@@ -62,15 +62,19 @@ public:
   std::string next_color(int x, int y);
 
   // Getters
-  int get_color(int x, int y) const { return tape_[x][y]; }
-  int get_max_sizeX() const { return sizeX_; }
-  int get_max_sizeY() const { return sizeY_; }
+  virtual int get_color(int x, int y) const { return tape_[x][y]; }
+  virtual int get_max_sizeX() const { return sizeX_; }
+  virtual int get_max_sizeY() const { return sizeY_; }
+  virtual int get_min_sizeX() const { return 0; }
+  virtual int get_min_sizeY() const { return 0; }
+
   const vector<vector<int>> &get_tape() const { return tape_; } // Reference
 
-  std::string show_color(int x, int y);
+  virtual std::string show_color(int x, int y);
   void InfoCell(int posX, int posY);
 
   // Setter
+  virtual void set_tape() {};
   // Change Color of the Cell
-  void SetCell(int posX, int posY, int color);
+  virtual void SetCell(int posX, int posY, int color);
 };
