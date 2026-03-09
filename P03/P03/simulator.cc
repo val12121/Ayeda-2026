@@ -64,14 +64,12 @@ void Simulator::run()
   while (!isFinished())
   {
     std::cout << *this;
-    std::cin.get();
-    int food = 0;
+    
     for (int i = 0; i < ants_.size(); i++) {
       if (ants_[i]->ant_type() == "Car") {
         double food = 0;
         // Obtenemos el color de la celda donde está el carnívoro
         int color_carnivoro = tape_->get_color(ants_[i]->getx(), ants_[i]->gety());
-
         for (int j = 0; j < ants_.size(); j++) {
           // Si es herbívora Y está en una celda del mismo color que el carnívoro
           if (ants_[j]->ant_type() == "Her") {
@@ -104,6 +102,16 @@ void Simulator::run()
       tape_->switcher(ants_[i]);
     }
     steps_++;
+    std::string input;
+    std::cout << "Presiona Enter para continuar o escribe 'exit' para parar: \n";
+    // Leemos la línea completa
+    std::getline(std::cin, input);
+    
+    // Si el usuario escribió exit, salimos del bucle
+    if (input == "exit") {
+      std::cout << "Simulación finalizada por el usuario.";
+      break; 
+    }
   }
 }
 
@@ -114,25 +122,20 @@ int Simulator::Save(const std::string &filename)
     return false;
 
   file << "FINAL DE LA SIMULACIÓN. PASOS: " << steps_ << "\n";
-  for (int i = tape_->get_min_sizeX(); i <= tape_->get_max_sizeX(); i++)
-  {
-    for (int j = tape_->get_min_sizeY(); j <= tape_->get_max_sizeY(); j++)
-    {
+  for (int i = tape_->get_min_sizeX(); i <= tape_->get_max_sizeX(); i++) {
+    for (int j = tape_->get_min_sizeY(); j <= tape_->get_max_sizeY(); j++) {
       Ant *aux = nullptr;
-      for (Ant *a : ants_)
-      {
+      for (Ant *a : ants_) {
         if (a->getx() == i && a->gety() == j)
         {
           aux = a;
           break;
         }
       }
-      if (aux != nullptr)
-      {
+      if (aux != nullptr) {
         file << *aux << " ";
       }
-      else
-      {
+      else {
         // Representamos los colores con caracteres o espacios
         int color = tape_->get_color(i, j);
         if (color >= 0)

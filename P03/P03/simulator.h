@@ -62,7 +62,6 @@ private:
   void step() { steps_++; };
   bool isFinished()
   {
-    // for (Ant *a : ants_)
     // {
     //   if (a->getx() < tape_->get_min_sizeX() || a->gety() < tape_->get_min_sizeY() ||
     //       a->getx() >= tape_->get_max_sizeX() ||

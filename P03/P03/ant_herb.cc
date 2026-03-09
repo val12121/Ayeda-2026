@@ -41,6 +41,6 @@ void Ant_Herbivore::step(Tape *tape)
   LifeTime--;
 
   std::cout << "Tipo de hormiga: " << ant_type() << ", pos: ";
-  std::cout << x_ << " " << y_ << " Lifetime: "<< LifeTime;
+  std::cout << this->getx() << " " << this->gety() << " Lifetime: "<< LifeTime;
   std::cout << " Dir: "<< static_cast<int>(dir_) << std::endl;
 }

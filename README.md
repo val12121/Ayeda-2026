@@ -33,6 +33,8 @@ Versión final con jerarquía de clases, interacción entre especies y tableros 
 ## 💻 Compilación y Ejecución
 
 Para compilar la versión más reciente (Práctica 3), utiliza el siguiente comando en tu terminal:
+(Recuerda que a la hora de ejecutarlo el mensaje que se muestra debajo de la simulación corresponde
+a la siguiente gráfica, no a la de arriba)
 
 ```bash
 g++ -o main ant.cc ant_x.cc main.cc simulator.cc tape.cc tape_sliding.cc ant_herb.cc ant_car.cc
