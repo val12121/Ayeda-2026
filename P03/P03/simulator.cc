@@ -69,13 +69,13 @@ void Simulator::run()
       if (ants_[i]->ant_type() == "Car") {
         double food = 0;
         // Obtenemos el color de la celda donde está el carnívoro
-        int color_carnivoro = tape_->get_color(ants_[i]->getx(), ants_[i]->gety());
+        //int color_carnivoro = tape_->get_color(ants_[i]->getx(), ants_[i]->gety());
         for (int j = 0; j < ants_.size(); j++) {
           // Si es herbívora Y está en una celda del mismo color que el carnívoro
           if (ants_[j]->ant_type() == "Her") {
-            int color_herbivora = tape_->get_color(ants_[j]->getx(), ants_[j]->gety());
+            //int color_herbivora = tape_->get_color(ants_[j]->getx(), ants_[j]->gety());
             
-            if (color_herbivora == color_carnivoro) {
+            if (ants_[i]->getx() == ants_[j]->getx() && ants_[i]->gety() == ants_[j]->gety() ) {
               // Sumamos su vida al acumulador 
               food += ants_[j]->get_life();
               // Aplicamos daño 

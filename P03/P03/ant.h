@@ -75,7 +75,7 @@ class Ant {
   protected:
   int x_, y_;
   int size_x, size_y;
-  double LifeTime = 40; 
+  double LifeTime = 100; 
   Direction dir_;
   std::string lado_;
 
