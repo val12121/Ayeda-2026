@@ -78,9 +78,9 @@ void Simulator::run()
             int color_herbivora = tape_->get_color(ants_[j]->getx(), ants_[j]->gety());
             
             if (color_herbivora == color_carnivoro) {
-              // Sumamos su vida al acumulador 'food'
+              // Sumamos su vida al acumulador 
               food += ants_[j]->get_life();
-              // Aplicamos daño usando la función voracity del carnívoro 'i' sobre la herbívora 'j'
+              // Aplicamos daño 
               ants_[j]->Damage(ants_[i]->get_voracity());
             }
           }

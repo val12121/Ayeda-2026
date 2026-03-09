@@ -2,8 +2,6 @@
 
 void Ant_Herbivore::step(Tape *tape) 
 {
-  std::cout << "Tipo de hormiga: " << ant_type() << ", pos: ";
-  std::cout << x_ << " " << y_ << " Lifetime: "<< LifeTime << std::endl;
 
   if (tape->get_color(x_, y_) == 0) { // If color == magenta
     if (get_dir(0) == 'D') {
@@ -28,6 +26,7 @@ void Ant_Herbivore::step(Tape *tape)
     }
     LifeTime += 2;
     tape->SetCell(x_, y_, 3);
+    
   }
   else if (tape->get_color(x_, y_) == 3) { // If color == black
     if (get_dir(3) == 'D') {
@@ -40,4 +39,8 @@ void Ant_Herbivore::step(Tape *tape)
   }
   this->move();
   LifeTime--;
+
+  std::cout << "Tipo de hormiga: " << ant_type() << ", pos: ";
+  std::cout << x_ << " " << y_ << " Lifetime: "<< LifeTime;
+  std::cout << " Dir: "<< static_cast<int>(dir_) << std::endl;
 }
