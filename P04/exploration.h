@@ -8,26 +8,46 @@ class ExplorationFunction {
     virtual unsigned operator()(const key&, unsigned) const=0;
   private:
 };
-
 template <typename key> 
 class FE_lineal : public ExplorationFunction<key> {
   public:
-    FE_lineal(std::vector<std::vector<key>> hash, unsigned blocksize) {
-      hash_ = hash; 
-      blocksize_ = blocksize;
-      equality();
+    FE_lineal() {} 
+    unsigned operator()(const key& k, unsigned i) const override {
+      return i; 
     }
-    void equality() {
-      aux_.resize(hash_.size());
-      for (int i = 0; i < hash_.size(); i++) {
-        hash_[i].resize(blocksize_);
-      }
+};
+template <typename key>
+class FE_Quadratic : public ExplorationFunction<key> {
+  public:
+    FE_Quadratic() {}
+    unsigned operator()(const key& k, unsigned i) const override {
+      return i * i; // El salto es el cuadrado del intento
+    }
+};
+
+template <typename key>
+class FE_DoubleHash : public ExplorationFunction<key> {
+  public:
+    FE_DoubleHash(DispersionFunction<key>& fd) : fe_aux(fd) {}
+
+    unsigned operator()(const key& k, unsigned i) const override {
+      return i * fe_aux(k);
     }
   private:
-    std::vector<std::vector<key>> hash_;
-    std::vector<std::vector<bool>> aux_;
-    unsigned blocksize_;
-    bool overflowing;
+    DispersionFunction<key>& fe_aux;
+};
+
+template <typename key>
+class FE_Redispersion : public ExplorationFunction<key> {
+  public:
+    FE_Redispersion(DispersionFunction<key>& fd_aux) : fd_aux_(fd_aux) {}
+
+    unsigned operator()(const key& k, unsigned i) const override {
+      // Redispersión: el salto suele ser i veces una función secundaria
+      return i * fd_aux_(k);
+    }
+  private:
+    DispersionFunction<key>& fd_aux_;
 };
 
 #endif
