@@ -14,6 +14,7 @@ void ejecutar_menu(T &tabla)
     std::cout << "\n---------- MENÚ HASH ----------" << std::endl;
     std::cout << "1. Insertar NIF" << std::endl;
     std::cout << "2. Buscar NIF" << std::endl;
+    std::cout << "3. Mostrar tabla" << std::endl;
     std::cout << "0. Salir" << std::endl;
     std::cout << "Seleccione opción: ";
     std::cin >> opcion;
@@ -39,6 +40,10 @@ void ejecutar_menu(T &tabla)
       else {
         std::cout << ">>> Clave " << clave << " NO encontrada." << std::endl;
       }
+      break;
+    case 3:
+        std::cout << "\nESTADO ACTUAL DE LA TABLA HASH:" << std::endl;
+        tabla.print();
       break;
     case 0:
       std::cout << "Saliendo del programa..." << std::endl;
@@ -84,7 +89,6 @@ int main(int argc, char *argv[])
   // 3. Selección de la lógica según el tipo de Tabla
   if (hash_type == "close")
   {
-    // Para cerrada necesitamos blockSize y Función de Exploración
     if (argc < 11)
     {
       std::cerr << "Error: Faltan parámetros para dispersión cerrada (-bs y -fe)." << std::endl;
@@ -107,16 +111,13 @@ int main(int argc, char *argv[])
       fe = new FE_lineal<long>();
     }
 
-    // Instanciar Tabla con Secuencia Estática
     HashTable<long, staticSequence<long>> ht(tablesize, *fd, *fe, bs);
     ejecutar_menu(ht);
   }
   else if (hash_type == "open")
   {
-    // En abierta, la exploración es lineal por defecto (no se usa realmente para saltos)
     ExplorationFunction<long> *fe = new FE_lineal<long>();
 
-    // Instanciar Tabla con Secuencia Dinámica (bs = 0 porque no tiene límite)
     HashTable<long, dynamicSequence<long>> ht(tablesize, *fd, *fe, 0);
     ejecutar_menu(ht);
   }
