@@ -1,10 +1,14 @@
+#ifndef SEQUENCE
+#define SEQUENCE
 #include "iostream"
 
 template <typename key>
 class Sequence {
   public:
     Sequence<key>() {}
-    virtual bool Sequence<Key>::search(const Key& k) const = 0;
-    virtual bool Sequence<Key>::insert(const Key& k) = 0;
+    virtual bool search(const key& k) const = 0;
+    virtual bool insert(const key& k) = 0;
   private:
 };
+
+#endif

@@ -7,5 +7,4 @@ int main(int argc, char *argv[])
 {
   int tablesize = std::stoi(argv[2]);
   
-  
 }

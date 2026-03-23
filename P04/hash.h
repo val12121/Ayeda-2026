@@ -1,19 +1,30 @@
+#ifndef HASH
+#define HASH
+
 #include <iostream>
 #include "staticsequence.h"
 #include "dynamicsequence.h"
 #include "dispersion.h"
 #include "exploration.h"
 
-template <class key, class Container = staticSequence<key>> 
-class HashTable {
-  public:
-    HashTable<Key,Container>(unsigned, DispersionFunction<Key>& fd, ExplorationFunction<Key>&,unsigned fe) {
-      fd_ = new DispersionFunction(fd);
-      fe_ = new ExplorationFunction(fe);
+template <class key, class Container = staticSequence<key>>
+class HashTable
+{
+public:
+  HashTable<key, Container>(unsigned ts, DispersionFunction<key> &fd, ExplorationFunction<key> &, unsigned fe, unsigned bs) : fd_(fd), fe_(fe), tableSize_(ts), blockSize_(bs)
+  {
+    table = new Container *[tableSize_]; //Vector de vectores
+    for (unsigned i = 0; i < tableSize_; ++i) {
+      table[i] = new Container(blockSize_); // Inicializamos cada secuencia
     }
-  private:
-    DispersionFunction<Key> fd_;
-    ExplorationFunction<Key> fe_;
-    key tableSize_;
-    key blockSize_;
+  }
+
+private:
+  DispersionFunction<key> &fd_;
+  ExplorationFunction<key> &fe_;
+  unsigned tableSize_;
+  unsigned blockSize_;
+  Container **table;
 };
+
+#endif
