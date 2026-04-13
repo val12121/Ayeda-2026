@@ -9,7 +9,6 @@
 template <class Key>
 void seleccion(staticSequence<Key> &seq, unsigned size, int trace, unsigned long &comps, unsigned long &swaps)
 {
-
   if (size == 0 && trace >= 2)
   {
     std::cerr << "[ERROR 0] Intento de ordenar una secuencia vacía.\n";
@@ -51,23 +50,22 @@ void seleccion(staticSequence<Key> &seq, unsigned size, int trace, unsigned long
       std::cout << "\n";
     }
 
-    for (unsigned i = 0; i < size - 1; ++i)
-    {
-      if (seq[i + 1] < seq[i] && trace >= 2)
-      {
-        std::cerr << "Fallo crítico: La secuencia no quedó ordenada correctamente.\n";
-        return;
-      }
-    }
-
-    if (trace >= 3)
+  if (trace >= 3)
     {
       std::cout << "Fin del algoritmo. Comprobaciones: " << comps << ", Swaps: " << swaps << "\n";
     }
   }
+
+  for (unsigned i = 0; i < size - 1; ++i)
+  {
+    if (seq[i + 1] < seq[i] && trace >= 2)
+    {
+      std::cerr << "Fallo crítico: La secuencia no quedó ordenada correctamente.\n";
+      return;
+    }
+  }
 }
 
-// b. Burbuja (Mejorado con flag de parada)
 template <class Key>
 void burbuja(staticSequence<Key> &seq, unsigned size, int trace, unsigned long &comps, unsigned long &swaps)
 {
@@ -192,10 +190,10 @@ void merge(staticSequence<Key> &seq, int left, int mid, int right, unsigned long
     R[j] = seq[mid + 1 + j];
   }
 
-  int i = 0;    
-  int j = 0;    
-  int k = left; 
-  
+  int i = 0;
+  int j = 0;
+  int k = left;
+
   while (i < n1 && j < n2)
   {
     comps++;
